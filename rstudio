@@ -1,0 +1,69 @@
+classInterval=c(5,10,15,20,25,30,35)
+frequency=c(5,7,2,8,7,3,6)
+classWidth=5
+#Histogram
+hist(rep(classInterval,frequency),col="blue",main="Histogram",xlab="Class Interval",ylab="Frequency") 
+#Cumulative
+plot(classInterval,cumfre=cumsum(frequency),type="o",col="blue",main="Cumulative Curve",xlab="Class Interval",ylab="Frequency")
+#Mean
+mean(frequency)
+#Median
+median(frequency)
+#Mode
+modal_class=which.max(frequency)
+lowerLimit=classInterval[modal_class]-classWidth/2
+f=frequency[modal_class]
+f1=frequency[modal_class-1]
+f2=frequency[modal_class+1]
+modeVal=(lowerLimit+((f-f1)/(2*f-f1-f2))*classWidth)
+modeVal
+#Range
+range(classInterval)
+#Range
+r=max(classInterval)-min(classInterval)
+r
+#Variance
+variance=var(frequency)
+variance
+#Standard Deviation
+standardDeviation=sd(frequency)
+standardDeviation
+#Interquartile Range
+InterQuartileRange = IQR(frequency)
+InterQuartileRange
+#Moments
+rawmoment1 = mean(frequency)
+rawmoment1
+rawmoment2 = mean(frequency^2)
+rawmoment2
+rawmoment3 = mean(frequency^3)
+rawmoment3
+rawmoment4 = mean(frequency^4)
+rawmoment4
+#Skewness and Kurtosis
+install.packages("e1071")
+library(e1071)
+skewness(frequency)
+kurtosis(frequency)
+#Pearson and Spearman
+cor(frequency,classInterval,method = "pearson")
+cor(frequency,classInterval,method = "spearman")
+#Correspond
+x=c(1,2,3,4,5,6,7,8)
+y=c(2,5,7,8,10,12,15,18)
+fit=lm(y~x)
+summary(fit)
+coefficients=coef(fit)
+print(paste("Intercept",coefficients[1]))
+print(paste("Slope:",coefficients[2]))
+residuals = fit$residuals
+fitted_value = fit$fitted.values
+# To plot Residuals
+residuals
+fitted_value
+plot(fitted_value,residuals,main="Residual Plot", xlab="Fitted alues",ylab="Residuals",pch=19)
+abline(h=0,col="red")
+#To calculate Mean Residual Sum of Squares(MRSS)
+rss=sum(residuals^2)
+df=length(fit) - length(mean(residuals))
+rss/df
